@@ -19,6 +19,9 @@ Domain-Driven Design (DDD) y la interfaz toma como referencia Atomic Design.
 
 \---
 
+## Link de FIGMA
+https://www.figma.com/make/4Jz4K65AKZ9YAxtqGVO5Vp/Analizador-Vocacional-de-TikTok?t=5VKGBkiCdyvvXgXF-1
+
 ## Problema a solucionar
 
 Elegir una carrera no siempre parte de información suficiente. Muchos estudiantes conocen la oferta
@@ -312,6 +315,116 @@ input → loading → results
 El caso de uso se construye una sola vez y recibe el repositorio mediante inyección de dependencias.
 
 \---
+
+## Metodología de desarrollo
+ 
+El proyecto se desarrolló mediante una metodología **iterativa e incremental**. El trabajo se dividió en entregas pequeñas que permitieron diseñar, implementar, probar y mejorar el prototipo de forma progresiva.
+ 
+No se intentó construir toda la solución en una sola etapa. Primero se validó la experiencia visual, después se implementó la aplicación móvil y finalmente se organizó el código mediante DDD y Atomic Design.
+ 
+### Etapas de trabajo
+ 
+#### 1. Análisis del problema
+ 
+El equipo identificó las dificultades que tienen los estudiantes al momento de elegir una carrera y definió el objetivo principal de la aplicación: ofrecer una orientación inicial basada en patrones de contenido digital.
+ 
+En esta etapa se establecieron:
+ 
+- La problemática.
+- Los usuarios principales.
+- La propuesta de valor.
+- El alcance del prototipo.
+- Las limitaciones del análisis vocacional.
+ 
+#### 2. Diseño del prototipo
+ 
+Se diseñaron las pantallas principales y el recorrido del usuario:
+ 
+1. Ingreso del perfil de TikTok.
+2. Estado de procesamiento.
+3. Presentación del Big Five.
+4. Recomendación de carreras.
+5. Opción para realizar otro análisis.
+ 
+El diseño se trabajó primero como prototipo visual para validar la organización de la información antes de implementar la aplicación móvil.
+ 
+#### 3. Modelado del dominio
+ 
+Se aplicó Domain-Driven Design para identificar los conceptos principales del proyecto:
+ 
+- Perfil analizado.
+- Perfil vocacional.
+- Rasgo de personalidad.
+- Big Five.
+- Carrera relacionada.
+- Afinidad.
+- Repositorio de análisis.
+ 
+Estos conceptos forman el lenguaje ubicuo utilizado por el equipo en el código y la documentación.
+ 
+#### 4. Implementación incremental
+ 
+La aplicación se implementó por partes:
+ 
+- Configuración de React Native y Expo.
+- Creación de las pantallas.
+- Navegación entre estados.
+- Validación del usuario de TikTok.
+- Simulación del análisis.
+- Presentación de rasgos y carreras.
+- Separación del código en capas DDD.
+- Creación de componentes reutilizables.
+ 
+Cada incremento podía ejecutarse y probarse antes de continuar con el siguiente.
+ 
+#### 5. Organización visual con Atomic Design
+ 
+Los elementos de la interfaz se clasificaron como:
+ 
+- Átomos.
+- Moléculas.
+- Organismos.
+- Plantillas.
+- Páginas.
+ 
+Solo se extrajeron componentes cuando tenían una responsabilidad clara o podían reutilizarse. Esto evitó crear componentes innecesarios.
+ 
+#### 6. Pruebas y correcciones
+ 
+El equipo comprobó el proyecto mediante:
+ 
+- `npx expo-doctor`.
+- `npx tsc --noEmit`.
+- Pruebas en Expo Go.
+- Revisión de validaciones.
+- Pruebas de navegación.
+- Revisión en diferentes tamaños de pantalla.
+- Verificación del teclado y desplazamiento.
+- Revisión de textos y resultados.
+ 
+Los errores encontrados se corrigieron antes de continuar con nuevas funcionalidades.
+ 
+#### 7. Control de versiones
+ 
+Git y GitHub se utilizaron para registrar el trabajo del equipo. Cada integrante realiza cambios en ramas específicas y crea commits relacionados con su responsabilidad.
+ 
+El flujo utilizado es:
+ 
+```text
+Actualizar repositorio
+        ↓
+Crear o seleccionar una rama
+        ↓
+Realizar cambios
+        ↓
+Probar el proyecto
+        ↓
+Crear el commit
+        ↓
+Subir la rama
+        ↓
+Revisar mediante Pull Request
+
 
 ## Tecnologías
 
