@@ -425,6 +425,12 @@ Subir la rama
         ↓
 Revisar mediante Pull Request
 
+### Apoyo de Inteligencia Artificial (Gemini Pro)
+
+Durante el desarrollo del proyecto, el equipo utilizó **Gemini Pro** como herramienta de asistencia técnica para agilizar la implementación y resolver bloqueos puntuales:
+
+- **Desarrollo en React Native:** Apoyo en la estructuración de componentes con TypeScript, manejo de estados de navegación, configuración de estilos con `StyleSheet`, animaciones con `Animated` y compatibilidad de vistas en Expo.
+- **Diseño del módulo de Scraping:** Asistencia en el planteamiento de la lógica de extracción de datos públicos, normalización de metadatos de publicaciones y separación de responsabilidades entre el backend y la aplicación móvil.
 
 ## Tecnologías
 
