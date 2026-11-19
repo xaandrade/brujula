@@ -89,9 +89,10 @@ La aplicación móvil funciona como prototipo navegable. Actualmente permite:
 * Mostrar carreras relacionadas y porcentajes de afinidad.
 * Reiniciar el flujo para analizar otro perfil.
 
-La versión actual utiliza `MockProfileAnalyzerRepository`. Esto significa que los resultados son
-simulados y sirven para probar la navegación, el diseño y la arquitectura. Todavía no se ejecuta el
-scraper ni un modelo de inteligencia artificial real.
+La aplicación móvil utiliza `MockProfileAnalyzerRepository`. Además, el repositorio incluye una API
+REST inicial en `backend/` que devuelve el mismo perfil de prueba. La aplicación todavía no está
+conectada a esa API. Ni la app ni el backend ejecutan scraping o un modelo de inteligencia artificial
+real.
 
 No se debe presentar el resultado actual como diagnóstico psicológico ni como garantía de éxito en una
 carrera.
@@ -130,6 +131,50 @@ src/
     └── theme/
         └── theme.ts
 ```
+
+El backend está en una carpeta independiente:
+
+```text
+backend/
+├── src/
+│   ├── app.ts
+│   ├── profileAnalyzer.ts
+│   └── server.ts
+├── package.json
+└── tsconfig.json
+```
+
+### API REST simulada
+
+Para iniciar el backend desde una terminal de PowerShell:
+
+```powershell
+cd backend
+npm install
+npm run dev
+```
+
+La API escucha en el puerto `3000` por defecto. Se puede cambiar mediante la variable de entorno
+`PORT`.
+
+|Método|Endpoint|Descripción|
+|-|-|-|
+|`GET`|`/api/health`|Comprueba que la API está activa|
+|`POST`|`/api/profiles/analyze`|Devuelve un perfil vocacional simulado|
+
+Ejemplo de solicitud:
+
+```powershell
+Invoke-RestMethod -Method Post `
+  -Uri http://localhost:3000/api/profiles/analyze `
+  -ContentType "application/json" `
+  -Body '{"handle":"@ejemplo"}'
+```
+
+El endpoint valida el usuario y responde con el perfil, rasgos Big Five y carreras en el formato que
+espera la app. Las respuestas de error contienen un código y un mensaje en JSON. Esta API es solo
+para desarrollo: CORS está abierto y los resultados son fijos, por lo que antes de publicarla se
+deben implementar controles de acceso, límites de solicitudes y un análisis real con consentimiento.
 
 ### Dominio
 
