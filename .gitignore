@@ -1,28 +1,28 @@
-# Dependencias
+# Dependencias del proyecto (Node.js)
 node_modules/
 
-# Expo
+# Archivos generados por Expo y compilación web
 .expo/
 .expo-shared/
 dist/
 web-build/
 expo-env.d.ts
 
-# Carpetas nativas generadas por Expo Prebuild
+# Carpetas nativas generadas al ejecutar Expo Prebuild
 /android/
 /ios/
 
-# Cachés
+# Archivos temporales de caché y compilación TypeScript
 .cache/
 .metro-health-check*
 *.tsbuildinfo
 
-# Variables de entorno locales
+# Variables de entorno y configuración local
 .env
 .env.local
 .env.*.local
 
-# Credenciales y archivos de firma
+# Certificados, credenciales y llaves de firma
 *.jks
 *.keystore
 *.p8
@@ -30,14 +30,14 @@ expo-env.d.ts
 *.key
 *.mobileprovision
 
-# Registros
+# Archivos de registro (logs) de gestores de paquetes
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 *.log
 
-# Archivos del sistema y del editor
+# Archivos ocultos del sistema operativo y configuración del IDE
 .DS_Store
 Thumbs.db
 .idea/
@@ -45,7 +45,7 @@ Thumbs.db
 !.vscode/extensions.json
 !.vscode/settings.json
 
-# Archivos temporales
+# Archivos temporales y respaldos de edición
 *.orig.*
 *.swp
 *.swo
