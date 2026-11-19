@@ -89,10 +89,9 @@ La aplicación móvil funciona como prototipo navegable. Actualmente permite:
 * Mostrar carreras relacionadas y porcentajes de afinidad.
 * Reiniciar el flujo para analizar otro perfil.
 
-La aplicación móvil utiliza `MockProfileAnalyzerRepository`. Además, el repositorio incluye una API
-REST inicial en `backend/` que devuelve el mismo perfil de prueba. La aplicación todavía no está
-conectada a esa API. Ni la app ni el backend ejecutan scraping o un modelo de inteligencia artificial
-real.
+La aplicación móvil utiliza `ApiProfileAnalyzerRepository` para consultar la API REST en `backend/`.
+La API devuelve un perfil simulado; todavía no se ejecuta scraping ni un modelo de inteligencia
+artificial real.
 
 No se debe presentar el resultado actual como diagnóstico psicológico ni como garantía de éxito en una
 carrera.
@@ -119,6 +118,7 @@ src/
 │       └── AnalyzeTikTokProfile.ts
 ├── infrastructure/
 │   └── repositories/
+│       ├── ApiProfileAnalyzerRepository.ts
 │       └── MockProfileAnalyzerRepository.ts
 └── presentation/
     ├── components/
@@ -176,6 +176,35 @@ espera la app. Las respuestas de error contienen un código y un mensaje en JSON
 para desarrollo: CORS está abierto y los resultados son fijos, por lo que antes de publicarla se
 deben implementar controles de acceso, límites de solicitudes y un análisis real con consentimiento.
 
+### Conectar la aplicación con la API
+
+La app usa `EXPO_PUBLIC_API_URL` como dirección del backend. Para probarla en un teléfono físico:
+
+1. Copia `.env.example` como `.env.local` en la raíz del proyecto.
+2. En PowerShell, ejecuta `ipconfig` y busca la dirección IPv4 de la red Wi-Fi de la computadora.
+3. En `.env.local`, sustituye `192.168.1.100` por esa dirección. Por ejemplo:
+
+   ```text
+   EXPO_PUBLIC_API_URL=http://192.168.1.25:3000
+   ```
+
+4. Conecta el teléfono y la computadora a la misma red Wi-Fi. Inicia el backend en una terminal y
+   Expo en otra:
+
+   ```powershell
+   cd backend
+   npm run dev
+   ```
+
+   ```powershell
+   npx expo start --clear
+   ```
+
+En un navegador o emulador que comparta el entorno de la computadora se puede usar
+`http://localhost:3000`. Un teléfono físico no puede usar `localhost` para llegar a la computadora.
+Si el teléfono no logra conectarse, revisa que el firewall permita conexiones entrantes al puerto
+`3000`. Reinicia Expo después de cambiar `.env.local`.
+
 ### Dominio
 
 `src/domain` contiene los conceptos y contratos principales:
@@ -203,17 +232,17 @@ El caso de uso conoce el contrato del repositorio, pero no conoce su implementac
 ### Infraestructura
 
 `MockProfileAnalyzerRepository` implementa el contrato definido en el dominio. Simula una espera y
-devuelve un perfil vocacional de prueba.
+devuelve un perfil vocacional de prueba localmente. `ApiProfileAnalyzerRepository` implementa el mismo
+contrato y envía el usuario a `POST /api/profiles/analyze`.
 
-Cuando se implemente el backend, podrá crearse `ApiProfileAnalyzerRepository` con el mismo contrato. Ese
-repositorio llamará a la API que coordine:
+Actualmente `App.tsx` inyecta el repositorio de API en `AnalyzeTikTokProfile`. El repositorio valida
+la estructura de la respuesta, comunica los errores del servidor y detiene solicitudes que superen
+15 segundos. La dirección del backend se configura con `EXPO_PUBLIC_API_URL`; si no se define, usa
+`http://localhost:3000`.
 
-1. El scraper.
-2. La normalización de publicaciones.
-3. El análisis Big Five.
-4. La recomendación de carreras.
-
-Las pantallas y el caso de uso no deberían necesitar cambios importantes al sustituir el repositorio.
+El backend actual todavía devuelve datos fijos: no obtiene publicaciones, no ejecuta un análisis Big
+Five real ni recomienda carreras a partir del contenido. El scraper, la normalización y el análisis
+son pasos futuros, no funciones implementadas.
 
 ### Presentación
 
@@ -488,6 +517,7 @@ Revisar mediante Pull Request
 * TypeScript y TSX.
 * `@expo/vector-icons`.
 * `react-native-safe-area-context`.
+* Express para la API REST.
 * Node.js.
 * npm.
 * Visual Studio Code.

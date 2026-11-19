@@ -24,8 +24,12 @@ export function ProfileInputScreen({ onAnalyze }: ProfileInputScreenProps) {
 
   const submit = () => {
     const cleanHandle = handle.trim().replace(/^@/, "");
-    if (cleanHandle.length < 2) {
-      setError("Escribe un usuario válido.");
+    if (
+      cleanHandle.length < 2 ||
+      cleanHandle.length > 24 ||
+      !/^[A-Za-z0-9._]+$/.test(cleanHandle)
+    ) {
+      setError("Usa entre 2 y 24 letras, números, puntos o guiones bajos.");
       return;
     }
     setError("");
@@ -52,8 +56,8 @@ export function ProfileInputScreen({ onAnalyze }: ProfileInputScreenProps) {
           Analiza un perfil de <Text style={styles.highlight}>TikTok.</Text>
         </Text>
         <Text style={styles.subtitle}>
-          Revisamos sus publicaciones recientes para estimar sus rasgos de personalidad y sugerir
-          carreras relacionadas en  base al analisis hecho.
+          Esta versión de demostración no consulta publicaciones de TikTok. Muestra un perfil de
+          prueba para validar la conexión y las recomendaciones.
         </Text>
 
         <View style={styles.steps}>
