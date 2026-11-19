@@ -1,10 +1,11 @@
 import { useMemo, useState } from "react";
+import { Alert } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
 import { AnalyzeTikTokProfile } from "./src/application/use-cases/AnalyzeTikTokProfile";
 import type { VocationalProfile } from "./src/domain/entities/VocationalProfile";
-import { MockProfileAnalyzerRepository } from "./src/infrastructure/repositories/MockProfileAnalyzerRepository";
+import { ApiProfileAnalyzerRepository } from "./src/infrastructure/repositories/ApiProfileAnalyzerRepository";
 import { AnalysisLoadingScreen } from "./src/presentation/screens/AnalysisLoadingScreen";
 import { ProfileInputScreen } from "./src/presentation/screens/ProfileInputScreen";
 import { ResultsScreen } from "./src/presentation/screens/ResultsScreen";
@@ -17,7 +18,7 @@ export default function App() {
   const [profile, setProfile] = useState<VocationalProfile | null>(null);
 
   const analyzeProfile = useMemo(
-    () => new AnalyzeTikTokProfile(new MockProfileAnalyzerRepository()),
+    () => new AnalyzeTikTokProfile(new ApiProfileAnalyzerRepository()),
     [],
   );
 
@@ -29,8 +30,12 @@ export default function App() {
       const result = await analyzeProfile.execute(rawHandle);
       setProfile(result);
       setScreen("results");
-    } catch {
+    } catch (error) {
       setScreen("input");
+      Alert.alert(
+        "No se pudo analizar el perfil",
+        error instanceof Error ? error.message : "Ocurrió un error inesperado.",
+      );
     }
   };
 

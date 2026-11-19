@@ -89,10 +89,9 @@ La aplicación móvil funciona como prototipo navegable. Actualmente permite:
 * Mostrar carreras relacionadas y porcentajes de afinidad.
 * Reiniciar el flujo para analizar otro perfil.
 
-La aplicación móvil utiliza `MockProfileAnalyzerRepository`. Además, el repositorio incluye una API
-REST inicial en `backend/` que devuelve el mismo perfil de prueba. La aplicación todavía no está
-conectada a esa API. Ni la app ni el backend ejecutan scraping o un modelo de inteligencia artificial
-real.
+La aplicación móvil utiliza `ApiProfileAnalyzerRepository` para consultar la API REST en `backend/`.
+La API devuelve un perfil simulado; todavía no se ejecuta scraping ni un modelo de inteligencia
+artificial real.
 
 No se debe presentar el resultado actual como diagnóstico psicológico ni como garantía de éxito en una
 carrera.
@@ -175,6 +174,35 @@ El endpoint valida el usuario y responde con el perfil, rasgos Big Five y carrer
 espera la app. Las respuestas de error contienen un código y un mensaje en JSON. Esta API es solo
 para desarrollo: CORS está abierto y los resultados son fijos, por lo que antes de publicarla se
 deben implementar controles de acceso, límites de solicitudes y un análisis real con consentimiento.
+
+### Conectar la aplicación con la API
+
+La app usa `EXPO_PUBLIC_API_URL` como dirección del backend. Para probarla en un teléfono físico:
+
+1. Copia `.env.example` como `.env.local` en la raíz del proyecto.
+2. En PowerShell, ejecuta `ipconfig` y busca la dirección IPv4 de la red Wi-Fi de la computadora.
+3. En `.env.local`, sustituye `192.168.1.100` por esa dirección. Por ejemplo:
+
+   ```text
+   EXPO_PUBLIC_API_URL=http://192.168.1.25:3000
+   ```
+
+4. Conecta el teléfono y la computadora a la misma red Wi-Fi. Inicia el backend en una terminal y
+   Expo en otra:
+
+   ```powershell
+   cd backend
+   npm run dev
+   ```
+
+   ```powershell
+   npx expo start --clear
+   ```
+
+En un navegador o emulador que comparta el entorno de la computadora se puede usar
+`http://localhost:3000`. Un teléfono físico no puede usar `localhost` para llegar a la computadora.
+Si el teléfono no logra conectarse, revisa que el firewall permita conexiones entrantes al puerto
+`3000`. Reinicia Expo después de cambiar `.env.local`.
 
 ### Dominio
 
