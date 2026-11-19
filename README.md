@@ -19,12 +19,12 @@ Domain-Driven Design (DDD) y la interfaz toma como referencia Atomic Design.
 
 \---
 
-## Problema
+## Problema a solucionar
 
 Elegir una carrera no siempre parte de información suficiente. Muchos estudiantes conocen la oferta
 académica, pero tienen dificultades para relacionarla con sus intereses, su forma de trabajar y sus
 rasgos personales. Los test vocacionales tradicionales pueden ser útiles, aunque a menudo se perciben
-como largos o poco relacionados con el contexto cotidiano del estudiante.
+como largos o poco relacionados con el contexto cotidiano del estudiante. Es por esta razón que nace nuestra propuesta y mas que nada poder solventar el gran estres de los adolescentes que tienen al buscar una oferta laboral. 
 
 Las publicaciones digitales contienen señales sobre temas de interés, estilo de comunicación,
 creatividad y formas de interacción. Estas señales no definen por completo a una persona y tampoco
@@ -35,7 +35,7 @@ El problema que aborda Brújula es:
 > Facilitar una primera orientación vocacional que conecte patrones de expresión digital con rasgos de
 > personalidad y áreas de estudio.
 
-## Solución
+## Solución al problema
 
 La aplicación plantea el siguiente recorrido:
 
@@ -95,7 +95,7 @@ carrera.
 
 \---
 
-## Arquitectura DDD
+## Arquitectura DDD DOMAIN-DRIVEN-DESIGN
 
 DDD se utiliza para que el proyecto esté organizado alrededor del dominio de orientación vocacional, no
 alrededor de React Native o de una API específica. La lógica central puede mantenerse aunque cambie la
