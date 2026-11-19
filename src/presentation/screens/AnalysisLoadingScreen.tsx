@@ -46,7 +46,7 @@ export function AnalysisLoadingScreen({ handle }: { handle: string }) {
         </Animated.View>
         <View style={styles.status}>
           <View style={styles.dot} />
-          <Text style={styles.statusText}>ANALIZANDO PUBLICACIONES</Text>
+          <Text style={styles.statusText}>ANALIZANDO LAS PUBLICACIONES</Text>
         </View>
         <Text style={styles.title}>
           Analizando a <Text style={styles.highlight}>@{handle}</Text>
