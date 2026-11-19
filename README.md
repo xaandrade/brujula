@@ -186,10 +186,12 @@ publicaciones ni calcular el Big Five.
 
 ### Apoyo de Inteligencia Artificial (Gemini Pro)
 
-Durante el desarrollo del proyecto, el equipo utilizó **Gemini Pro** como herramienta de asistencia técnica para agilizar la implementación y resolver bloqueos puntuales:
+Durante el desarrollo del prototipo móvil, el equipo utilizó **Gemini Pro** como herramienta de asistencia técnica:
 
-- **Desarrollo en React Native:** Apoyo en la estructuración de componentes con TypeScript, manejo de estados de navegación, configuración de estilos con `StyleSheet`, animaciones con `Animated` y compatibilidad de vistas en Expo.
-- **Diseño del módulo de Scraping:** Asistencia en el planteamiento de la lógica de extracción de datos públicos, normalización de metadatos de publicaciones y separación de responsabilidades entre el backend y la aplicación móvil.
+- **Desarrollo en React Native:** Apoyo en la estructuración de componentes con TypeScript, manejo de estados de navegación (`input → loading → results`), estilos con `StyleSheet`, animaciones con `Animated` y compatibilidad en Expo.
+- **Conceptualización y simulación del Scraping:** Asistencia en el planteamiento conceptual de cómo se estructurarán los datos extraídos de perfiles públicos y en la creación de los datos simulados (`MockProfileAnalyzerRepository`) para probar el flujo en la app móvil, dejando la implementación real del scraper para una futura etapa de backend.
+
+Todo el código y las propuestas generadas fueron revisadas, adaptadas y validadas por los integrantes del equipo bajo los principios de DDD y Atomic Design del proyecto.
 
 ### Dirección de dependencias
 
