@@ -53,7 +53,7 @@ export function ProfileInputScreen({ onAnalyze }: ProfileInputScreenProps) {
         </Text>
         <Text style={styles.subtitle}>
           Revisamos sus publicaciones recientes para estimar sus rasgos de personalidad y sugerir
-          carreras relacionadas.
+          carreras relacionadas en  base al analisis hecho.
         </Text>
 
         <View style={styles.steps}>

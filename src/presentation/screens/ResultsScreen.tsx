@@ -29,7 +29,7 @@ export function ResultsScreen({ profile, onRestart }: ResultsScreenProps) {
           Perfil de <Text style={styles.highlight}>@{profile.handle}</Text>
         </Text>
         <Text style={styles.description}>
-          Estimación basada en los temas, el lenguaje y el estilo de sus publicaciones recientes.
+          Estimación basada en los temas, el lenguaje y el estilo de sus publicaciones recientes en TIKTOK.
         </Text>
 
         <View style={styles.profile}>
