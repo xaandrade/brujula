@@ -6,6 +6,7 @@ node_modules/
 .expo-shared/
 dist/
 web-build/
+/backend/dist/
 expo-env.d.ts
 
 # Carpetas nativas generadas al ejecutar Expo Prebuild
