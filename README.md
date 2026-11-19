@@ -118,6 +118,7 @@ src/
 │       └── AnalyzeTikTokProfile.ts
 ├── infrastructure/
 │   └── repositories/
+│       ├── ApiProfileAnalyzerRepository.ts
 │       └── MockProfileAnalyzerRepository.ts
 └── presentation/
     ├── components/
@@ -231,17 +232,17 @@ El caso de uso conoce el contrato del repositorio, pero no conoce su implementac
 ### Infraestructura
 
 `MockProfileAnalyzerRepository` implementa el contrato definido en el dominio. Simula una espera y
-devuelve un perfil vocacional de prueba.
+devuelve un perfil vocacional de prueba localmente. `ApiProfileAnalyzerRepository` implementa el mismo
+contrato y envía el usuario a `POST /api/profiles/analyze`.
 
-Cuando se implemente el backend, podrá crearse `ApiProfileAnalyzerRepository` con el mismo contrato. Ese
-repositorio llamará a la API que coordine:
+Actualmente `App.tsx` inyecta el repositorio de API en `AnalyzeTikTokProfile`. El repositorio valida
+la estructura de la respuesta, comunica los errores del servidor y detiene solicitudes que superen
+15 segundos. La dirección del backend se configura con `EXPO_PUBLIC_API_URL`; si no se define, usa
+`http://localhost:3000`.
 
-1. El scraper.
-2. La normalización de publicaciones.
-3. El análisis Big Five.
-4. La recomendación de carreras.
-
-Las pantallas y el caso de uso no deberían necesitar cambios importantes al sustituir el repositorio.
+El backend actual todavía devuelve datos fijos: no obtiene publicaciones, no ejecuta un análisis Big
+Five real ni recomienda carreras a partir del contenido. El scraper, la normalización y el análisis
+son pasos futuros, no funciones implementadas.
 
 ### Presentación
 
@@ -513,6 +514,7 @@ Durante el desarrollo del proyecto, el equipo utilizó **Gemini Pro** como herra
 * TypeScript y TSX.
 * `@expo/vector-icons`.
 * `react-native-safe-area-context`.
+* Express para la API REST.
 * Node.js.
 * npm.
 * Visual Studio Code.
